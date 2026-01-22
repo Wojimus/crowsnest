@@ -70,6 +70,9 @@ function log_output {
     local prefix
     prefix="DEBUG: ${1}"
     while read -r line; do
+        if [[ "Passed encoding because nobody is watching" == *${line}* ]]; then
+            log_msg "WOJ: Detected Cam Failure"
+        fi
         if [[ "${CROWSNEST_LOG_LEVEL}" = "debug" ]]; then
             log_msg "${prefix}: ${line}"
         fi
